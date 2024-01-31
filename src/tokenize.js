@@ -55,7 +55,18 @@ const tokenize = (input) => {
         type: 'Name',
         value: letter,
       });
-      // cursor++;
+      continue;
+    }
+
+    if (isQuote(character)) {
+      let string = '';
+
+      while (!isQuote(input[++cursor])) {
+        string += input[cursor];
+      }
+
+      tokens.push({ type: 'String', value: string });
+      cursor++;
       continue;
     }
 
