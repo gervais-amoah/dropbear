@@ -26,6 +26,28 @@ const tokenize = (input) => {
       cursor++;
       continue;
     }
+
+    if (isNumber(character)) {
+      tokens.push({
+        type: 'Number',
+        value: Number(character),
+      });
+      cursor++;
+      continue;
+    }
+
+    if (isLetter(character)) {
+      tokens.push({
+        type: 'Name',
+        value: character,
+      });
+      cursor++;
+      continue;
+    }
+
+    //  default
+    cursor++;
+    continue;
   }
 
   return tokens;
