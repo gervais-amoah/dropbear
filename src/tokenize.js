@@ -8,6 +8,7 @@ const {
 
 const tokenize = (input) => {
   const tokens = [];
+  let valueHolder = '';
   let cursor = 0;
 
   while (cursor < input.length) {
@@ -28,10 +29,17 @@ const tokenize = (input) => {
     }
 
     if (isNumber(character)) {
-      tokens.push({
-        type: 'Number',
-        value: Number(character),
-      });
+      valueHolder += character;
+      const nextCharacter = input[cursor + 1];
+
+      if (!isNumber(nextCharacter)) {
+        tokens.push({
+          type: 'Number',
+          value: Number(valueHolder),
+        });
+
+        valueHolder = '';
+      }
       cursor++;
       continue;
     }
@@ -46,8 +54,7 @@ const tokenize = (input) => {
     }
 
     //  default
-    cursor++;
-    continue;
+    throw new Error(`${character} is not valid`);
   }
 
   return tokens;

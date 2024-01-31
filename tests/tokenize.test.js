@@ -57,7 +57,7 @@ describe(tokenize, () => {
   });
   // Exercise 1: End
 
-  it.skip('should be able to handle multiple-digit numbers', () => {
+  it('should be able to handle multiple-digit numbers', () => {
     const input = '(11 22)';
 
     const result = [
