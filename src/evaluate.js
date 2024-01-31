@@ -11,8 +11,14 @@ const apply = (node) => {
   return fn(...args);
 };
 
+const getIdentifier = (node) => {
+  if (environment[node.name]) return environment[node.name];
+  throw new ReferenceError(`${node.name} does not exist`);
+};
+
 const evaluate = (node) => {
   if (node.type === 'CallExpression') return apply(node);
+  if (node.type === 'Identifier') return getIdentifier(node);
   if (node.value) return node.value;
 };
 
