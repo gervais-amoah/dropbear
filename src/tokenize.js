@@ -45,11 +45,17 @@ const tokenize = (input) => {
     }
 
     if (isLetter(character)) {
+      let letter = character;
+
+      while (isLetter(input[++cursor])) {
+        letter += input[cursor];
+      }
+
       tokens.push({
         type: 'Name',
-        value: character,
+        value: letter,
       });
-      cursor++;
+      // cursor++;
       continue;
     }
 
